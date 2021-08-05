@@ -34,6 +34,18 @@ const pokemon = [
     }
   ];
 
+  //Middleware
+  app.use(express.urlencoded({extended: true}));  //this gives you the body of the request in a nice format, can then console log it to see input
+  app.use((req,res,next) => {      //runs on all routes so put it at top
+     // console.log(`run for all routes: ${req.method} ${req.url}`);  //simple way to do basic logging
+      let logStr= `${req.method} ${req.url}`;
+      if(req.body) {
+          logStr += ` input data is: ${JSON.stringify(req.body)}`;
+      }
+      console.log(logStr);
+      next();                     //will go on to other routes
+  })
+
 // app.get('/pokemon',(req,res) => {
 //     res.send(pokemon);
     
@@ -45,7 +57,10 @@ app.get('/pokemon/',(req,res) => {
     });
 
 app.get('/pokemon/:index',(req,res) => {
-    res.send(pokemon[req.params.index]);
+//    res.send(pokemon[req.params.index]);
+res.render('show.ejs', {
+    pokemon: pokemon[req.params.index]
+})
 });
 
 app.listen(3000, ()=>{
