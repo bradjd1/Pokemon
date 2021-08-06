@@ -10,6 +10,11 @@
 
 <body>
     <h1>Pokemon Index</h1>
+    <a href="/pokemon/new">
+        <button>
+            Create New Pokemon
+        </button>
+    </a>
     <ul class="pokemon">
         <% for(let i=0;i<pokemon.length;i++) { %>
             <li>
@@ -17,13 +22,12 @@
                     <%=pokemon[i].name%>
                 </a>
             </li>
+            <a href='/pokemon/<%=i%>/edit'>Edit</a>
+            <form action="/pokemon/<%=i%>?_method=DELETE" method='POST'>    <!--form can't delete so need to use a method -->
+                <input type="submit" value="Delete">
+            </form>
             <% } %>
     </ul>
-    <a href="/pokemon/new">
-        <button>
-            Create New Pokemon
-        </button>
-    </a>
 </body>
 
 </html>

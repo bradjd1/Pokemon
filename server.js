@@ -1,6 +1,7 @@
 const express = require('express');
 
 const app = express();  //create an instance of express called app
+const methodOverride = require('method-override');  //used for form to be able to edit and delete
 
 //create a pokemon array
 const pokemon = [
@@ -46,6 +47,7 @@ app.use((req, res, next) => {      //runs on all routes so put it at top
     next();                     //will go on to other routes
 })
 
+app.use(methodOverride('_method'));
 // app.get('/pokemon',(req,res) => {
 //     res.send(pokemon);
 
@@ -60,10 +62,17 @@ app.get("/pokemon/new", (req, res) => {
     res.render('new.ejs');
 })
 
+app.get("/pokemon/:index/edit", (req,res) => {
+    res.render("edit.ejs", {
+        pokemon: pokemon[req.params.index],index: req.params.index
+    })
+})
+
 app.get('/pokemon/:arrayIndex', (req, res) => {
     //    res.send(pokemon[req.params.index]);
     res.render('show.ejs', {
-        pokemon: pokemon[req.params.arrayIndex]
+        pokemon: pokemon[req.params.arrayIndex],
+        arrIndex: req.params.arrayIndex
     })
 });
 
@@ -72,7 +81,15 @@ app.post("/pokemon/new", (req, res) => {
     res.redirect('/pokemon');
 })
 
+app.put('/pokemon/:index', (req,res) => {
+    pokemon[req.params.index] = req.body;
+    res.redirect('/pokemon');
+})
 
+app.delete('/pokemon/:index', (req,res) => {
+    pokemon.splice(req.params.index,1);
+    res.redirect('/pokemon');
+})
 
 app.listen(3000, () => {
     console.log("I am listening");
