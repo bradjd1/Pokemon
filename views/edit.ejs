@@ -10,8 +10,8 @@
     <h1>Edit Pokemon</h1>
 
     <form action="/pokemon/<%=index%>?_method=PUT" method="POST">
-        name: <input type="text" name="name"><br>
-        image: <input type="text" name="img"><br>
+        name: <input type="text" value ="<%=pokemon.name%>" name="name"><br>
+        image: <input type="text" value ="<%=pokemon.img%>"name="img"><br>
         <input type="submit" value="Edit Pokemon">
     </form>
 

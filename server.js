@@ -17,6 +17,7 @@ app.use((req, res, next) => {      //runs on all routes so put it at top
 
 app.use(methodOverride('_method'));
 app.use('/pokemon', require('./controllers/pokemonController'));
+app.use('/players', require('./controllers/playersController'));
 
 app.listen(3000, () => {
     console.log("I am listening");
