@@ -43,5 +43,10 @@ router.post("/", (req, res) => {
     res.redirect(`/players/profile/${index}`);   //redirect to the fruits get
 })
 
+router.delete('/profiles/:index',(req,res) => {
+    console.log('in delete')
+    players.splice(req.params.index, 1);    //splice(place in array to start deleting, how many to remove)
+    res.redirect('/players');     //redirect back to index route or homepage
+})
 
 module.exports = router;
