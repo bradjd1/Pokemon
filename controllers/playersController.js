@@ -11,6 +11,17 @@ router.get('/signup', (req, res) => {    //remember order - we want new to come 
     res.render('players/signup.ejs');
 })
 
+router.get('/login', (req,res) => {
+    res.render('players/login.ejs');
+})
+
+router.post('/login', (req, res) => {
+    console.log('login', req.body);
+    let userIndex = players.findIndex(players => players.username == req.body.username && players.password == req.body.password);
+    console.log('userIndex', userIndex)
+    res.redirect(`profile/${userIndex}`)
+})
+
 router.get('/profile/:index/edit',(req,res) => {
     console.log('in edit')
     res.render('players/editProfile.ejs',{
