@@ -24,12 +24,12 @@
     <ul class="pokemon">
         <% for(let i=0;i<pokemon.length;i++) { %>
             <li>
-                <a href="/pokemon/<%=i%>">
+                <a href="/pokemon/<%=pokemon[i].id%>">
                     <%=pokemon[i].name%>
                 </a>
             </li>
-            <a href='/pokemon/<%=i%>/edit'>Edit</a>
-            <form action="/pokemon/<%=i%>?_method=DELETE" method='POST'>    <!--form can't delete so need to use a method -->
+            <a href='/pokemon/<%=pokemon[i].id%>/edit'>Edit</a>
+            <form action="/pokemon/<%=pokemon[i].id%>?_method=DELETE" method='POST'>    <!--form can't delete so need to use a method -->
                 <input type="submit" value="Delete">
             </form>
             <% } %>
