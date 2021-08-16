@@ -8,15 +8,16 @@
 </head>
 <body>
     <h1>Pokemon Edit Profile page Form</h1>
+    <h2>welcome <%=player.name%></h2>
 
-    <form action = "/players" method="post">
+    <form action = "/players/profile/<%=id%>?_method=PUT" method="post">
         Name: <input type="text" name="name" value="<%=player.name%>"> <br>
         Username: <input type="text" name="username"value="<%=player.username%>"><br>
         Password: <input type="text" name="password"value="<%=player.password%>"><br>
         <input type="submit" value="Edit">
-        <link rel='stylesheet' href='../../../css/app.css'>
+        <link rel='stylesheet' href='/css/app.css'>
     </form>
-    <form action="/players/profiles/<%=index%>?_method=DELETE" method='POST'>
+    <form action="/players/profile/<%=id%>?_method=DELETE" method='POST'>
         <input type="submit" value="Delete Profile">
     </form>
 </body>
