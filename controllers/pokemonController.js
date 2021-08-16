@@ -2,7 +2,7 @@
 const express = require('express');
 //instantiating our router
 const router = express.Router();
-const pokemon = require('../models/pokemon')    //need to make it available to the router
+const pokemon = require('../pokemon')    //need to make it available to the router
 
 router.get('/', (req, res) => {  
     res.render('index.ejs', {pokemon: pokemon});

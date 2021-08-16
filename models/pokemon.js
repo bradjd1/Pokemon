@@ -1,31 +1,24 @@
-const pokemon = [
-    {
-        name: "Bulbasaur",
-        img: "http://img.pokemondb.net/artwork/bulbasaur.jpg"
-    },
-    {
-        name: "Ivysaur",
-        img: "http://img.pokemondb.net/artwork/ivysaur.jpg"
-    },
-    {
-        name: "Venusaur",
-        img: "http://img.pokemondb.net/artwork/venusaur.jpg"
-    },
-    {
-        name: "Charmander",
-        img: "http://img.pokemondb.net/artwork/charmander.jpg"
-    },
-    {
-        name: "Charizard",
-        img: "http://img.pokemondb.net/artwork/charizard.jpg"
-    },
-    {
-        name: "Squirtle",
-        img: "http://img.pokemondb.net/artwork/squirtle.jpg"
-    },
-    {
-        name: "Wartortle",
-        img: "http://img.pokemondb.net/artwork/wartortle.jpg"
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class Pokemon extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
     }
-];
-module.exports = pokemon;
+  };
+  Pokemon.init({
+    name: DataTypes.STRING,
+    img: DataTypes.STRING
+  }, {
+    sequelize,
+    modelName: 'Pokemon',
+  });
+  return Pokemon;
+};
