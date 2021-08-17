@@ -13,6 +13,9 @@ module.exports = {
         },
         {
           name: "Rookies",
+        },
+        {
+          name: "TeamOne",
         }
       ],
       {}
