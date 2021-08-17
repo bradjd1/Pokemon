@@ -26,11 +26,6 @@ router.put('/profile/:id', (req, res) => {
     });
 })
 
-// router.post('/login', (req, res) => {
-//     let userIndex = players.findIndex(players => players.username == req.body.username && players.password == req.body.password);
-//     res.redirect(`profile/${userIndex}`)
-// })
-
 //login
 router.post('/login', (req, res) => {
     Player.findOne({ where: { username: req.body.username, password: req.body.password } }).then((players) => {
@@ -40,12 +35,6 @@ router.post('/login', (req, res) => {
     //let userId = User.findAll({ where: {username: req.body.username, password: req.body.password}});
 })
 
-// router.get('/profile/:index/edit',(req,res) => {
-//     res.render('players/editProfile.ejs',{
-//         player: players[req.params.index],
-//         index: req.params.index
-//     })
-// })
 // edit page
 router.get('/profile/:id/edit', (req, res) => {
     // console.log('in profile id edit1', req.params.id);
@@ -59,13 +48,6 @@ router.get('/profile/:id/edit', (req, res) => {
 })
 
 //display page after login
-// router.get('/profile/:index',(req,res) => {
-//     res.render('players/profile.ejs',{
-//         player: players[req.params.index],
-//         index: req.params.index
-//     })
-// })
-//display page after login
 router.get('/profile/:id', (req, res) => {
     // console.log('**** in get proflie id');
     Player.findByPk(req.params.id).then((player) => {
@@ -77,11 +59,6 @@ router.get('/profile/:id', (req, res) => {
     });
 });
 
-// router.post("/", (req, res) => {
-//     players.push(req.body);
-//     let index = players.length - 1
-//     res.redirect(`/players/profile/${index}`);
-// })
 router.post("/", (req, res) => {
     // console.log('in create',req.body,req.params.id);
     Player.create(req.body).then ((newPlayer) => {
