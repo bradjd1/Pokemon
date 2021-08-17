@@ -3,6 +3,7 @@ const router = express.Router();
 
 //const players = require("../players");
 const Player = require("../models").Player;
+const Team = require("../models").Team;
 
 router.get('/', (req, res) => {
     res.render('players/index.ejs');
@@ -17,11 +18,12 @@ router.get('/login', (req, res) => {
 })
 
 router.put('/profile/:id', (req, res) => {
+    console.log('here');
     Player.update(req.body, {
         where: { id: req.params.id },
         returning: true,
     }).then((player) => {
-        // console.log('in put update player', req.body, req.params.id)
+        console.log('in put update player', req.body, req.params.id)
         res.redirect(`/players/profile/${req.params.id}`);
     });
 })
@@ -36,15 +38,28 @@ router.post('/login', (req, res) => {
 })
 
 // edit page
-router.get('/profile/:id/edit', (req, res) => {
+router.get('/profile/:id/edit', async (req, res) => {
     // console.log('in profile id edit1', req.params.id);
-    Player.findByPk(req.params.id).then((player) => {
-        // console.log('in profile id edit2', player)
-        res.render('players/editProfile.ejs', {
-            player: player,
-            id: req.params.id
-        });
+    const thisPlayer = await Player.findByPk(req.params.id,{
+        include:[{
+            model: Team,
+            attributes: ['name','id'],
+        }],
+        attributes:['id','username','name','password','teamId'],
     })
+    const allTeams = await Team.findAll()
+    console.log('in get edit this player',thisPlayer)
+    console.log('in get edit this player team name',thisPlayer.Team.name)
+  //  console.log('in get edit all teams',allTeams)
+
+    // .then((player) => {
+    //     console.log('in profile id edit2', player)
+        res.render('players/editProfile.ejs', {
+            player: thisPlayer,
+            id: req.params.id,
+            teams: allTeams
+        });
+    // })
 })
 
 //display page after login
