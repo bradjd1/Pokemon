@@ -18,7 +18,7 @@ router.get('/login', (req, res) => {
 })
 
 router.put('/profile/:id', (req, res) => {
-    console.log('here');
+    console.log('here',req.body);
     Player.update(req.body, {
         where: { id: req.params.id },
         returning: true,
@@ -61,6 +61,24 @@ router.get('/profile/:id/edit', async (req, res) => {
         });
     // })
 })
+
+// edit page
+// router.get('/profile/:id/edit', (req, res) => {
+//     // console.log('in profile id edit1', req.params.id);
+//     Player.findByPk(req.params.id, {
+//         include: [{ model: Team },
+//         { model: Pokemon }],
+//     }).then((player) => {
+//         Team.findAll().then((allTeams) => {
+//             console.log('in profile id edit2', player)
+//             res.render('players/editProfile.ejs', {
+//                 player: thisPlayer,
+//                 id: req.params.id,
+//                 teams: allTeams,
+//             });
+//         });
+//     });
+// });
 
 //display page after login
 router.get('/profile/:id', (req, res) => {

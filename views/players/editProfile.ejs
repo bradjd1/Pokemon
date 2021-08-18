@@ -15,14 +15,15 @@
         Username: <input type="text" name="username"value="<%=player.username%>"><br>
         Password: <input type="text" name="password"value="<%=player.password%>"><br>
         Team: <input type="text" name="team" value="<%=player.Team.name%>"><br>
-        <form id='teams'>
+        
             <select id='selectedTeam'>
                 <option>Teams</option>
-                <% for(let i = 0;i < teams.length; i++) { %>
-                    <option value='<%=teams[i].name%>'><%=teams[i].name%></option>
+                <% for(let i = 0;i < teams.length; i++) { let selected = ( i == 0 )
+                    ? "selected" : ""; %>
+                    <option value='<%=teams[i].id%>'><%=teams[i].name%></option>
                     <% } %>
             </select>
-        </form>
+            <br>
 
         <input type="submit" value="Save">
         <link rel='stylesheet' href='/css/app.css'>
