@@ -11,7 +11,10 @@ router.get('/', (req, res) => {
 })
 
 router.get('/signup', (req, res) => {
+    Team.findAll({order:['id']}).then((teams) => {
+        console.log('in signup',teams);
     res.render('players/signup.ejs');
+    })
 })
 
 router.get('/login', (req, res) => {
