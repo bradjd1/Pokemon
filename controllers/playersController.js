@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
 
 router.get('/signup', (req, res) => {
     Team.findAll({order:['id']}).then((teams) => {
-        console.log('in signup',teams);
+     //   console.log('in signup',teams);
     res.render('players/signup.ejs');
     })
 })
@@ -22,12 +22,12 @@ router.get('/login', (req, res) => {
 })
 
 router.put('/profile/:id', (req, res) => {
-    console.log('here',req.body);
+    //console.log('here',req.body);
     Player.update(req.body, {
         where: { id: req.params.id },
         returning: true,
     }).then((player) => {
-        console.log('in put update player', req.body, req.params.id)
+       // console.log('in put update player', req.body, req.params.id)
         res.redirect(`/players/profile/${req.params.id}`);
     });
 })
@@ -52,9 +52,9 @@ router.get('/profile/:id/edit', async (req, res) => {
         attributes:['id','username','name','password','teamId'],
     })
     const allTeams = await Team.findAll()
-    console.log('show this player pokemon',thisPlayer.Pokemon);
-    console.log('in get edit this player',thisPlayer)
-    console.log('in get edit this player team name',thisPlayer.Team.name)
+    //console.log('show this player pokemon',thisPlayer.Pokemon);
+    //console.log('in get edit this player',thisPlayer)
+    //console.log('in get edit this player team name',thisPlayer.Team.name)
   //  console.log('in get edit all teams',allTeams)
 
     // .then((player) => {
