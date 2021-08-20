@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'pokemonId',
         otherKey: 'playerId'
       });
-    }
+    };
   };
   Pokemon.init({
     name: DataTypes.STRING,

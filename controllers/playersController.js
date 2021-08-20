@@ -4,6 +4,7 @@ const router = express.Router();
 //const players = require("../players");
 const Player = require("../models").Player;
 const Team = require("../models").Team;
+const Pokemon = require("../models").Pokemon;
 
 router.get('/', (req, res) => {
     res.render('players/index.ejs');
@@ -43,11 +44,12 @@ router.get('/profile/:id/edit', async (req, res) => {
     const thisPlayer = await Player.findByPk(req.params.id,{
         include:[{
             model: Team,
-            attributes: ['name','id'],
-        }],
+            attributes: ['name','id'],},
+        {model: Pokemon}], 
         attributes:['id','username','name','password','teamId'],
     })
     const allTeams = await Team.findAll()
+    console.log('show this player pokemon',thisPlayer.Pokemon);
     console.log('in get edit this player',thisPlayer)
     console.log('in get edit this player team name',thisPlayer.Team.name)
   //  console.log('in get edit all teams',allTeams)

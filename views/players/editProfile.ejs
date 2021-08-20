@@ -8,19 +8,16 @@
 </head>
 <body>
     <h1>Pokemon Edit Profile page Form</h1>
-    <h2>welcome <%=player.name%></h2>
-
+    <h2>welcome <%=player.name%>, member of team <%=player.Team.name%></h2>
     <form action = "/players/profile/<%=id%>?_method=PUT" method="post">
         Name: <input type="text" name="name" value="<%=player.name%>"> <br>
         Username: <input type="text" name="username"value="<%=player.username%>"><br>
         Password: <input type="text" name="password"value="<%=player.password%>"><br>
-        Team: <input type="text" name="team" value="<%=player.Team.name%>"><br>
-        
-            <select id='selectedTeam'>
-                <option>Teams</option>
+        Team:
+            <select name='teamId'>
                 <% for(let i = 0;i < teams.length; i++) { let selected = ( i == 0 )
                     ? "selected" : ""; %>
-                    <option value='<%=teams[i].id%>'><%=teams[i].name%></option>
+                    <option value='<%=teams[i].id%>' <%= player.Team.id == teams[i].id ? 'selected' : '' %>><%=teams[i].name%></option>
                     <% } %>
             </select>
             <br>
@@ -31,5 +28,16 @@
     <form action="/players/profile/<%=id%>?_method=DELETE" method='POST'>
         <input type="submit" value="Delete Profile">
     </form>
+    <br>
+    <a href='/Pokemon'>Pokemon Index</a>
+    <br>
+    <h3>Pokemon added by you:</h3>
+    <% for (let i = 0; i < player.Pokemons.length; i++){ %>
+        <li>
+          <%=player.Pokemons[i].name%></a>
+        </li>
+        <br />
+        <% } %>
+    <br />
 </body>
 </html>
